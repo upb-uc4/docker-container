@@ -1,8 +1,8 @@
 [
   {
     "id": "lagom-redeploy",
-    "execute-command": "/uc4/webhook/lagom/redeploy.sh",
-    "command-working-directory": "/uc4/webhook",
+    "execute-command": "./lagom/redeploy.sh",
+    "command-working-directory": "/opt/webhook",
     "response-message": "I redeployed the serivce!",
     "response-headers":
     [
@@ -34,8 +34,8 @@
   },
   {
     "id": "vue-redeploy",
-    "execute-command": "/uc4/webhook/vue/redeploy.sh",
-    "command-working-directory": "/uc4/webhook",
+    "execute-command": "./vue/redeploy.sh",
+    "command-working-directory": "/opt/webhook",
     "response-message": "I redeployed frontend!",
     "response-headers":
     [
