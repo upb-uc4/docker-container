@@ -29,7 +29,10 @@ RUN apt-get update && apt-get install -y kubectl
 RUN apt-get install webhook
 
 COPY webhook.json .
-COPY --chown=root lagom lagom
-COPY --chown=root vue vue
+COPY lagom lagom
+COPY vue vue
+
+RUN chmod -R +rwx /opt/webhook/vue
+RUN chmod -R +rwx /opt/webhook/lagom
 
 CMD webhook -hooks webhook.json -verbose -port 80 -urlprefix ""
