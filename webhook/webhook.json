@@ -1,0 +1,78 @@
+[
+  {
+    "id": "lagom-redeploy",
+    "execute-command": "/uc4/webhook/lagom/redeploy.sh",
+    "command-working-directory": "/uc4/webhook",
+    "response-message": "I redeployed the serivce!",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "pass-arguments-to-command":
+    [
+      {
+        "source": "payload",
+        "name": "repository.name"
+      }
+    ],
+    "trigger-rule":
+    {
+      "match":
+      {
+        "type": "value",
+        "value": "SFlx8cUl9c1Pz4Ja",
+        "parameter":
+        {
+          "source": "url",
+          "name": "token"
+        }
+      }
+    }
+  },
+  {
+    "id": "vue-redeploy",
+    "execute-command": "/uc4/webhook/vue/redeploy.sh",
+    "command-working-directory": "/uc4/webhook",
+    "response-message": "I redeployed frontend!",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "trigger-rule":
+    {
+      "and": 
+      [
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "latest",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "push_data.tag"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "lBdkHZnW6YovvLuD",
+            "parameter":
+            {
+              "source": "url",
+              "name": "token"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
