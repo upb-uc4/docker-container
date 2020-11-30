@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "Redeploying ui-web"
 docker stop ui-web
 docker rm ui-web
 docker rmi uc4official/ui-web:latest

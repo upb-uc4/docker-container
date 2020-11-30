@@ -29,14 +29,20 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update && apt-get install -y kubectl
 
+# Kind
+RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.9.0/kind-linux-amd64
+RUN chmod +x ./kind
+RUN mv ./kind /usr/bin/kind
+
 # Webhook
 RUN apt-get install webhook
 
-COPY webhook.json .
+COPY start.sh .
+COPY webhook.template.json .
 COPY lagom lagom
 COPY vue vue
 
 RUN chmod -R +rwx /opt/webhook/vue
 RUN chmod -R +rwx /opt/webhook/lagom
 
-CMD webhook -hooks webhook.json -verbose -port 80 -urlprefix ""
+CMD bash ./start.sh

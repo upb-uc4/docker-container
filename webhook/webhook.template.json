@@ -20,16 +20,33 @@
     ],
     "trigger-rule":
     {
-      "match":
-      {
-        "type": "value",
-        "value": "SFlx8cUl9c1Pz4Ja",
-        "parameter":
+      "and": 
+      [
         {
-          "source": "url",
-          "name": "token"
+          "match":
+          {
+            "type": "value",
+            "value": "latest",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "push_data.tag"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "$LAGOM_TOKEN",
+            "parameter":
+            {
+              "source": "url",
+              "name": "token"
+            }
+          }
         }
-      }
+      ]
     }
   },
   {
@@ -64,7 +81,7 @@
           "match":
           {
             "type": "value",
-            "value": "lBdkHZnW6YovvLuD",
+            "value": "$UI_TOKEN",
             "parameter":
             {
               "source": "url",
